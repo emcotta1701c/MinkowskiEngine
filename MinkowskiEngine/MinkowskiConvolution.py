@@ -299,13 +299,14 @@ class MinkowskiConvolutionBase(MinkowskiModuleBase):
 
         """
         #delete later
-        x_dense = input.dense()[0]]
+        x_dense = input.dense()[0]
         NaN_bool_matrix = torch.isnan(x_dense)
         has_NaN = torch.any(NaN_bool_matrix)
         if has_NaN:
             print("Sparse_ConvNeXtV2, NaN detected in input to MinkowskiConvolution.")
         else:
             print("Sparse_ConvNeXtV2, no NaN detected in input to MinkowskiConvolution.")
+
         assert isinstance(input, SparseTensor)
         assert input.D == self.dimension
 
@@ -342,7 +343,7 @@ class MinkowskiConvolutionBase(MinkowskiModuleBase):
             coordinate_map_key=out_coordinate_map_key,
             coordinate_manager=input._manager,
         )
-        output_dense = output.dense()[0]]
+        output_dense = output.dense()[0]
         NaN_bool_matrix = torch.isnan(output_dense)
         has_NaN = torch.any(NaN_bool_matrix)
         if has_NaN:
