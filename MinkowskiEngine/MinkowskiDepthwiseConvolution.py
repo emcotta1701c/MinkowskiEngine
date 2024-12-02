@@ -205,7 +205,11 @@ class MinkowskiDepthwiseConvolution(MinkowskiModuleBase):
             coordinate_map_key=out_key, 
             coordinate_manager=cm)
         """
-        #delete later                                                           
+        #delete later
+        output = SparseTensor(
+            outfeat,
+            coordinate_map_key=out_key,
+            coordinate_manager=cm)                               
         output_dense = output.dense()[0]
         NaN_bool_matrix = torch.isnan(output_dense)
         has_NaN = torch.any(NaN_bool_matrix)
@@ -213,6 +217,7 @@ class MinkowskiDepthwiseConvolution(MinkowskiModuleBase):
             print("Sparse_ConvNeXtV2, NaN detected after MinkowskiDepthwiseConvolution.")
         else:
             print("Sparse_ConvNeXtV2, no NaN detected after MinkowskiDepthwiseConvolution.")
+        return output
 
 
 if __name__ == "__main__":
